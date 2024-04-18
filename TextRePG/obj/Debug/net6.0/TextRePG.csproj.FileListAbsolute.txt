@@ -1,0 +1,15 @@
+C:\Users\31645\Desktop\Projecten\Text-RPG\TextRePG\bin\Debug\net6.0\TextRePG.exe
+C:\Users\31645\Desktop\Projecten\Text-RPG\TextRePG\bin\Debug\net6.0\TextRePG.deps.json
+C:\Users\31645\Desktop\Projecten\Text-RPG\TextRePG\bin\Debug\net6.0\TextRePG.runtimeconfig.json
+C:\Users\31645\Desktop\Projecten\Text-RPG\TextRePG\bin\Debug\net6.0\TextRePG.dll
+C:\Users\31645\Desktop\Projecten\Text-RPG\TextRePG\bin\Debug\net6.0\TextRePG.pdb
+C:\Users\31645\Desktop\Projecten\Text-RPG\TextRePG\obj\Debug\net6.0\TextRePG.csproj.AssemblyReference.cache
+C:\Users\31645\Desktop\Projecten\Text-RPG\TextRePG\obj\Debug\net6.0\TextRePG.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\31645\Desktop\Projecten\Text-RPG\TextRePG\obj\Debug\net6.0\TextRePG.AssemblyInfoInputs.cache
+C:\Users\31645\Desktop\Projecten\Text-RPG\TextRePG\obj\Debug\net6.0\TextRePG.AssemblyInfo.cs
+C:\Users\31645\Desktop\Projecten\Text-RPG\TextRePG\obj\Debug\net6.0\TextRePG.csproj.CoreCompileInputs.cache
+C:\Users\31645\Desktop\Projecten\Text-RPG\TextRePG\obj\Debug\net6.0\TextRePG.dll
+C:\Users\31645\Desktop\Projecten\Text-RPG\TextRePG\obj\Debug\net6.0\refint\TextRePG.dll
+C:\Users\31645\Desktop\Projecten\Text-RPG\TextRePG\obj\Debug\net6.0\TextRePG.pdb
+C:\Users\31645\Desktop\Projecten\Text-RPG\TextRePG\obj\Debug\net6.0\TextRePG.genruntimeconfig.cache
+C:\Users\31645\Desktop\Projecten\Text-RPG\TextRePG\obj\Debug\net6.0\ref\TextRePG.dll
