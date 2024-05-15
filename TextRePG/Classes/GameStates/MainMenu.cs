@@ -1,13 +1,14 @@
 ﻿using System.Diagnostics;
 using System.Net;
+using TextRePG.Classes.PlayerCharacter;
 using TextRePG.Lib;
 
 namespace TextRePG.Classes.GameStates
 {
     public class MainMenu : State
     {
-        public MainMenu(Stack<State> state) : base(state)
-        { }
+        public MainMenu(Stack<State> state, List<Character> characters, List<Character> characterDead) 
+            : base(state, characters, characterDead){ }
 
         /// <summary>
         /// Update updates the state, the state is set to "Main Menu"
@@ -16,10 +17,12 @@ namespace TextRePG.Classes.GameStates
         {
             Console.Clear();
             GUI.DrawState(this);
+
             GUI.DrawOptions(1, "Play");
+            GUI.DrawOptions(2, "Create Character");
             GUI.DrawOptions(-1, "Quit");
 
-            ProcessIntInput(InputManager.GetIntInput("> "));
+            ProcessIntInput(InputManager.GetIntInput("-> "));
         }
 
         /// <summary>
@@ -32,7 +35,12 @@ namespace TextRePG.Classes.GameStates
             {
                 case 1:
                     EndState = true; //Ends the state
-                    CurrentGameState.Push(new GameState(CurrentGameState)); //Pushes a new GameState into the stack.
+                    CurrentGameState.Push(new Temporary(CurrentGameState, characterList, characterGraveYard)); //Pushes a new GameState into the stack.
+                    break;
+
+                case 2:
+                    EndState = true;
+                    CurrentGameState.Push(new CharacterCreator(CurrentGameState, characterList, characterGraveYard));
                     break;
 
                 case -1:

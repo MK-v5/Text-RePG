@@ -1,4 +1,5 @@
 ﻿using System;
+using TextRePG.Classes.PlayerCharacter;
 
 namespace TextRePG.Classes.GameStates
 {
@@ -8,10 +9,25 @@ namespace TextRePG.Classes.GameStates
         protected Stack<State> CurrentGameState; //CurrentGameState is current state of the application
         protected bool EndState; //EndState ends state of the application
 
+        protected List<Character> characterList; //List of created characters
+        protected List<Character> characterGraveYard; //List of dead characters
+
+        private const int list_size = 7;
+
+        public List<Character> CharacterList
+        {
+            get => characterList;
+            protected set => characterList = value;
+        }
+
         //Initializes a state
-        protected State(Stack<State> state)
+        protected State(Stack<State> state, List<Character> characterList, List<Character> characterGraveYard)
         {
             CurrentGameState = state;
+            this.characterList = characterList;
+
+            this.CharacterList = new List<Character>(list_size); //capping the size of the list
+            this.characterGraveYard = characterGraveYard;
         }
 
         /// <summary>

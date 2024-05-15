@@ -6,6 +6,7 @@ namespace TextRePG.Classes.PlayerCharacter
 {
     public class Entity
     {
+/*
         public enum Race
         {
             None,
@@ -23,7 +24,7 @@ namespace TextRePG.Classes.PlayerCharacter
             Mage,
             Berserker
         }
-
+*/
         public enum CombatChoices
         {
             None,
@@ -35,8 +36,8 @@ namespace TextRePG.Classes.PlayerCharacter
         {
             characterName = "";
 
-            characterRace = Race.None;
-            characterClass = Class.None;
+            //characterRace = Race.None;
+            //characterClass = Class.None;
         }
 
         #region protected properties
@@ -147,8 +148,8 @@ namespace TextRePG.Classes.PlayerCharacter
 
         public bool IsBlocking() => Blocking;
 
-        public Race characterRace;
-        public Class characterClass;
+        //public Race characterRace;
+        //public Class characterClass;
         public CombatChoices combatOptions;
         #endregion end public properties
 
@@ -162,18 +163,52 @@ namespace TextRePG.Classes.PlayerCharacter
             {
                 //increase stats by race
                 case Wolf:
-                    
+                    maxHitPoints += 20;
+                    maxSkillPoints += 30;
+                    maxMagicPoints += 25;
                     break;
 
                 case Cat:
-
+                    maxHitPoints += 20;
+                    maxSkillPoints += 30;
+                    maxMagicPoints += 25;
                     break;
 
                 case Fox:
-
+                    maxHitPoints += 20;
+                    maxSkillPoints += 30;
+                    maxMagicPoints += 25;
                     break;
 
                 case Dragon:
+                    maxHitPoints += 20;
+                    maxSkillPoints += 30;
+                    maxMagicPoints += 25;
+                    break;
+
+                //increase stats by Class
+                case Knight:
+                    strength += 35;
+                    defense += 15;
+                    agility += 5;
+                    break;
+
+                case Rogue:
+                    strength += 35;
+                    defense += 15;
+                    agility += 5;
+                    break;
+
+                case Mage:
+                    strength += 35;
+                    defense += 15;
+                    agility += 5;
+                    break;
+
+                case Berserker:
+                    strength += 35;
+                    defense += 15;
+                    agility += 5;
                     break;
             }
         }
