@@ -6,25 +6,6 @@ namespace TextRePG.Classes.PlayerCharacter
 {
     public class Entity
     {
-/*
-        public enum Race
-        {
-            None,
-            Wolf,
-            Cat,
-            Fox,
-            Dragon
-        }
-
-        public enum Class
-        {
-            None,
-            Knight,
-            Rogue,
-            Mage,
-            Berserker
-        }
-*/
         public enum CombatChoices
         {
             None,
@@ -151,6 +132,7 @@ namespace TextRePG.Classes.PlayerCharacter
         //public Race characterRace;
         //public Class characterClass;
         public CombatChoices combatOptions;
+
         #endregion end public properties
 
         public virtual void LevelUp()

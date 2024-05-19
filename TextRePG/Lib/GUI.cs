@@ -11,13 +11,16 @@ namespace TextRePG.Lib
         public static void DrawState(State state)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"||{state.ToString()}||");
+            Console.WriteLine($"||{state}||");
             Console.ForegroundColor = ConsoleColor.White;
         }
 
-        public static void DrawOptions(int index, string option)
+        public static void DrawOptions(string[] options)
         {
-            Console.WriteLine($"[{index}] {option}");
+            for(int i = 0; i < options.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}) {options[i]}");
+            }
         }
     }
 }

@@ -9,23 +9,17 @@
         /// <returns>int named input</returns>
         public static int GetIntInput(string prompt)
         {
-            int input = -10;
-
-            while(input == -10)
+            while(true)
             {
                 Console.Write(prompt);
                 
-                try 
+                if(int.TryParse(Console.ReadLine(), out int input))
                 {
-                    input = Convert.ToInt32(Console.ReadLine());
+                    return input;
                 }
-                catch (FormatException) 
-                {
-                    Console.WriteLine("Invalid Input: Please enter integer input.");
-                }
-            }
 
-            return input;
+                Console.WriteLine("Please Put in a valid input(e.g. integer)..");
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace TextRePG.Classes.GameStates
 {
+/*
     public class Temporary : State
     {
         public Temporary(Stack<State> state, List<Character> characters, List<Character> CharacterNoMore) 
@@ -13,4 +14,5 @@ namespace TextRePG.Classes.GameStates
             Console.WriteLine("Hi there");
         }
     }
+*/
 }
