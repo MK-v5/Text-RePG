@@ -51,7 +51,7 @@ namespace TextRePG.Classes.GameStates
         /// <summary>
         /// Registers a state type with the state stack.
         /// </summary>
-        /// <typeparam name="T">The type of the state to register.</typeparam>
+        /// <typeparam name="Type">The type of the state to register.</typeparam>
         /// <param name="iD">the ID of the state to register.</param>
         public void RegisterState<Type>(State.ID iD) where Type : State
         {

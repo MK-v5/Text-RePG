@@ -28,6 +28,7 @@ namespace TextRePG.Classes
         private void RegisterState()
         {
             stacker.RegisterState<Menus>(State.ID.MainMenu);
+            stacker.RegisterState<CharacterCreation>(State.ID.CharacterCreator);
         }
 
         public void Run()

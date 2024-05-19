@@ -18,7 +18,7 @@ namespace TextRePG.Classes.GameStates
 
         public readonly string[] classOptions = { "Knight", "Rogue", "Mage", "Berserker" };
 
-        public CharacterCreation(Stacker stateStack, Context context, List<Character> characterList, List<Character> DeadCharacters) : base(stateStack, context, characterList, DeadCharacters)
+        public CharacterCreation(Stacker stateStack, Context context) : base(stateStack, context)
         { this.characterList = CharacterList; }
 
         public override void Draw()
@@ -93,12 +93,30 @@ namespace TextRePG.Classes.GameStates
             }
         }
 
+        void SelectClass()
+        {
+
+        }
+
         private Character CreateCharacter(Character playerCharacter)
         {
+            string? nameInput;
+/*
+            do
+            {
+                Console.WriteLine(">>> Character: \n"+
+                                    $"Race & Class: {playerCharacter}");
+            } while(nameInput?.Length < 2 || nameInput?.Length > 18);
+*/
+            //if (nameInput != null) playerCharacter.Name = nameInput;
 
             characterList.Add(playerCharacter);
 
             return playerCharacter;
+        }
+        public override string ToString()
+        {
+            return "Character Creator";
         }
     }
 }

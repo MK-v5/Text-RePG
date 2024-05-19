@@ -56,7 +56,7 @@ namespace TextRePG.Classes.PlayerCharacter
         public string Name
         {
             get => characterName; //returns value of characterName.
-            protected set => characterName = value; //assigns value of characterName (only in child).
+            set => characterName = value; //assigns value of characterName (only in child).
         }
 
         public int HP

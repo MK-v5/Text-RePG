@@ -13,7 +13,7 @@ namespace TextRePG.Classes.GameStates
     {
         private readonly string[] options = { "Start", "Characters", "Quit" };
 
-        public Menus(Stacker stateStack, Context context, List<Character> characterList, List<Character> DeadCharacters) : base(stateStack, context, characterList, DeadCharacters)
+        public Menus(Stacker stateStack, Context context) : base(stateStack, context)
         { }
 
         public override void Update()
@@ -37,6 +37,7 @@ namespace TextRePG.Classes.GameStates
 
                 case 2:
                     StateStack.PushState(State.ID.CharacterCreator);
+                    Console.Clear();
                     break;
 
                 case 3:

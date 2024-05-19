@@ -60,15 +60,15 @@ namespace TextRePG.Classes.GameStates
         }
 
         //Initializes a state
-        protected State(Stacker stateStack, Context stateContext , List<Character> characterList, List<Character> DeadCharacters)
+        protected State(Stacker stateStack, Context stateContext)
         {
             StateStack = stateStack;
             StateContext = stateContext;
-
+/*
             this.characterList = characterList;
-
-            this.CharacterList = new List<Character>(list_size); //capping the size of the list
             this.deadCharacters = DeadCharacters;
+            this.CharacterList = new List<Character>(list_size); //capping the size of the list
+*/
         }
 
         #region Voids
