@@ -1,4 +1,5 @@
 ﻿using TextRePG.Classes;
+using TextRePG.Classes.GameStates;
 
 namespace TextRePG
 {

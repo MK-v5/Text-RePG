@@ -6,37 +6,50 @@ namespace TextRePG.Classes
     public class Game
     {
 
+        private readonly Stacker stacker;
+
+        /*
         private Stack<State> stateStack; //created stack for the state class
         private List<Character>? characterList; //create an arrayList for the characters
         private List<Character>? characterGraveYard; // create a list of deceased characters
-
+        */
 
         public Game()
         {
-            Init();
+
+            stacker = new Stacker(new State.Context(10));
+            RegisterState();
+
+            stacker.PushState(State.ID.MainMenu);
+
+            stacker.ApplyQueuedChanges();
         }
 
-        private void Init()
+        private void RegisterState()
         {
-            stateStack = new Stack<State>();//initialize the currentState
-            characterList = new List<Character>(); //initalize the list of characters
-            characterGraveYard = new(); //initalize deceased characters
-
-
-            stateStack.Push(new MainMenu(stateStack, characterList, characterGraveYard));
+            stacker.RegisterState<Menus>(State.ID.MainMenu);
+            stacker.RegisterState<CharacterCreation>(State.ID.CharacterCreator);
         }
 
         public void Run()
         {
-            while (stateStack.Count > 0)
+            while (stacker.stateStack.Count > 0)
             {
-                stateStack.Peek().Update();
-
-                if (stateStack.Peek().RequestEndState())
-                    stateStack.Pop();
+                Draw();
+                Update();
             }
 
-            Console.WriteLine("Thank you for playing!");
+            //Console.WriteLine("Thank you for playing!");
+        }
+
+        private void Update()
+        {
+            stacker.Update();
+        }
+
+        private void Draw()
+        {
+            stacker.Draw();
         }
     }
 }

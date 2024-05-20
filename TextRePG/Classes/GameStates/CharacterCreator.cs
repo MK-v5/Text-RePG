@@ -2,7 +2,7 @@
 using TextRePG.Classes.PlayerCharacter.CharacterRaces;
 using TextRePG.Classes.PlayerCharacter.CharacterClasses;
 using TextRePG.Lib;
-
+/*
 namespace TextRePG.Classes.GameStates
 {
     public class CharacterCreator : State
@@ -206,3 +206,4 @@ namespace TextRePG.Classes.GameStates
         }
     }
 }
+*/

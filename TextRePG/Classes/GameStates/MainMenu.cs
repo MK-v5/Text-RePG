@@ -2,7 +2,7 @@
 using System.Net;
 using TextRePG.Classes.PlayerCharacter;
 using TextRePG.Lib;
-
+/*
 namespace TextRePG.Classes.GameStates
 {
     public class MainMenu : State
@@ -59,3 +59,4 @@ namespace TextRePG.Classes.GameStates
         }
     }
 }
+*/
