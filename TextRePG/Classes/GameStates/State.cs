@@ -59,16 +59,21 @@ namespace TextRePG.Classes.GameStates
             protected set => characterList = value;
         }
 
+        public List<Character> DeadCharacters
+        {
+            get => deadCharacters;
+            protected set => deadCharacters = value;
+        }
+
         //Initializes a state
         protected State(Stacker stateStack, Context stateContext)
         {
             StateStack = stateStack;
             StateContext = stateContext;
-/*
-            this.characterList = characterList;
-            this.deadCharacters = DeadCharacters;
+
+            this.CharacterList = characterList;
+            this.DeadCharacters = deadCharacters;
             this.CharacterList = new List<Character>(list_size); //capping the size of the list
-*/
         }
 
         #region Voids

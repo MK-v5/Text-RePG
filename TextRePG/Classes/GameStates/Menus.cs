@@ -36,8 +36,8 @@ namespace TextRePG.Classes.GameStates
                     break;
 
                 case 2:
+                    StateStack.PopState();
                     StateStack.PushState(State.ID.CharacterCreator);
-                    Console.Clear();
                     break;
 
                 case 3:

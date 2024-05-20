@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TextRePG.Classes.PlayerCharacter;
+using TextRePG.Classes.PlayerCharacter.CharacterClasses;
 using TextRePG.Classes.PlayerCharacter.CharacterRaces;
 using TextRePG.Lib;
 
@@ -19,10 +20,11 @@ namespace TextRePG.Classes.GameStates
         public readonly string[] classOptions = { "Knight", "Rogue", "Mage", "Berserker" };
 
         public CharacterCreation(Stacker stateStack, Context context) : base(stateStack, context)
-        { this.characterList = CharacterList; }
+        { characterList = CharacterList; }
 
         public override void Draw()
         {
+            Console.Clear();
             GUI.DrawState(this);
             GUI.DrawOptions(options);
         }
@@ -38,6 +40,7 @@ namespace TextRePG.Classes.GameStates
             {
                 case 1:
                     ChooseRace();
+                    Console.Clear();
                     break;
 
                 case 2:
@@ -46,7 +49,7 @@ namespace TextRePG.Classes.GameStates
                     break;
 
                 case 3:
-                    StateStack.ClearState();
+                    StateStack.PushState(State.ID.MainMenu);
                     break;
             }
         }
@@ -60,7 +63,10 @@ namespace TextRePG.Classes.GameStates
 
         void ChooseClass()
         {
+            GUI.DrawOptions(classOptions);
 
+            Console.WriteLine("\nPlease choose a class:\n");
+            SelectClass(InputManager.GetIntInput("-> "));
         }
 
         void SelectRace(int input)
@@ -93,27 +99,58 @@ namespace TextRePG.Classes.GameStates
             }
         }
 
-        void SelectClass()
+        void SelectClass(int input)
         {
+            switch (input)
+            {
+                case 1:
+                    Console.Clear();
+                    CreateCharacter(new Knight());
+                    StateStack.PushState(State.ID.MainMenu);
+                    break;
 
+                case 2:
+                    Console.Clear();
+                    CreateCharacter(new Rogue());
+                    StateStack.PushState(State.ID.MainMenu);
+                    break;
+
+                case 3:
+                    Console.Clear();
+                    CreateCharacter(new Mage());
+                    StateStack.PushState(State.ID.MainMenu);
+                    break;
+
+                case 4:
+                    Console.Clear();
+                    CreateCharacter(new Berserker());
+                    StateStack.PushState(State.ID.MainMenu);
+                    break;
+            }
         }
 
         private Character CreateCharacter(Character playerCharacter)
         {
+
             string? nameInput;
-/*
+
             do
             {
-                Console.WriteLine(">>> Character: \n"+
-                                    $"Race & Class: {playerCharacter}");
+                Console.WriteLine(">>> Character: \n" +
+                                    $"Race: {playerCharacter}");
+
+                Console.WriteLine("Please enter a valid name(2 to 18 characters):");
+                nameInput = Console.ReadLine();
+
             } while(nameInput?.Length < 2 || nameInput?.Length > 18);
-*/
-            //if (nameInput != null) playerCharacter.Name = nameInput;
+
+            if (nameInput != null) playerCharacter.Name = nameInput;
 
             characterList.Add(playerCharacter);
 
             return playerCharacter;
         }
+
         public override string ToString()
         {
             return "Character Creator";

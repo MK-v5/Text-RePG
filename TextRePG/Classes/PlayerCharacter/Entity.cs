@@ -13,12 +13,30 @@ namespace TextRePG.Classes.PlayerCharacter
             Defend,
         }
 
+        public enum Race
+        {
+            Wolf,
+            Cat,
+            Fox,
+            Dragon,
+            None
+        }
+
+        public enum Class
+        {
+            Knight,
+            Rogue,
+            Mage,
+            Berserker,
+            None
+        }
+
         public Entity()
         {
             characterName = "";
 
-            //characterRace = Race.None;
-            //characterClass = Class.None;
+            characterRace = Race.None;
+            characterClass = Class.None;
         }
 
         #region protected properties
@@ -58,6 +76,11 @@ namespace TextRePG.Classes.PlayerCharacter
             get => characterName; //returns value of characterName.
             set => characterName = value; //assigns value of characterName (only in child).
         }
+
+        public int Level 
+        { 
+            get => level;
+            set => level = value; }
 
         public int HP
         {
@@ -132,6 +155,10 @@ namespace TextRePG.Classes.PlayerCharacter
         //public Race characterRace;
         //public Class characterClass;
         public CombatChoices combatOptions;
+
+        public Race characterRace;
+
+        public Class characterClass;
 
         #endregion end public properties
 
