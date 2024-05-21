@@ -7,7 +7,7 @@ namespace TextRePG.Classes.GameStates
     {
 
         protected Stack<State> CurrentGameState; //CurrentGameState is current state of the application
-        protected bool EndState; //EndState ends state of the application
+        protected bool EndCombat; //EndCombat checks if combat has ended
 
         protected List<Character> characterList; //List of created characters
         protected List<Character> deadCharacters; //List of dead characters
@@ -46,6 +46,8 @@ namespace TextRePG.Classes.GameStates
             {
 
             }
+
+            
 
             //public readonly int 
         }
@@ -93,12 +95,6 @@ namespace TextRePG.Classes.GameStates
         /// </summary>
         /// <param name="input">The input to process.</param>
         protected virtual void ProcessIntInput(int input) { }
-
-        /// <summary>
-        /// Returns either True or False based upon <see cref="EndState"/>.
-        /// </summary>
-        /// <returns>Flag of <see cref="EndState"/>.</returns>
-        public bool RequestEndState() => EndState;
 
         #endregion end Voids
 

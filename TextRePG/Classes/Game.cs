@@ -38,8 +38,6 @@ namespace TextRePG.Classes
                 Draw();
                 Update();
             }
-
-            //Console.WriteLine("Thank you for playing!");
         }
 
         private void Update()

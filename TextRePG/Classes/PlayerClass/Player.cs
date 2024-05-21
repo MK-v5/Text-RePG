@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TextRePG.Classes.PlayerCharacter;
 
-namespace TextRePG.Classes.Player
+namespace TextRePG.Classes.PlayerClass
 {
     public class Player : Character
     {

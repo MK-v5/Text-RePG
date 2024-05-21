@@ -11,6 +11,7 @@ namespace TextRePG.Classes.PlayerCharacter
             None,
             Attack,
             Defend,
+            Skill,
         }
 
         public enum Race

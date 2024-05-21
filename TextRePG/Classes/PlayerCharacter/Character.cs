@@ -34,7 +34,7 @@ namespace TextRePG.Classes.PlayerCharacter
 
         public int UseMagic()
         {
-            //make skill Logic
+            //make magic Logic
             /*
             * make it 
             *
@@ -44,7 +44,7 @@ namespace TextRePG.Classes.PlayerCharacter
 
         public int UseSkill()
         {
-            //make magic logic
+            //make  skill logic
             throw new NotImplementedException();
         }
 

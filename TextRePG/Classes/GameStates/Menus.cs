@@ -13,7 +13,9 @@ namespace TextRePG.Classes.GameStates
     {
         private readonly string[] options = { "Start", "Characters", "Quit" };
 
-        public Menus(Stacker stateStack, Context context) : base(stateStack, context)
+        public Menus
+            (Stacker stateStack, Context context) 
+            : base(stateStack, context)
         { }
 
         public override void Update()
@@ -23,6 +25,7 @@ namespace TextRePG.Classes.GameStates
 
         public override void Draw()
         {
+            Console.Clear();
             GUI.DrawState(this);
             GUI.DrawOptions(options);
         }

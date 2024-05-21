@@ -19,6 +19,8 @@ namespace TextRePG.Classes.GameStates
 
         public readonly string[] classOptions = { "Knight", "Rogue", "Mage", "Berserker" };
 
+
+
         public CharacterCreation(Stacker stateStack, Context context) : base(stateStack, context)
         { characterList = CharacterList; }
 
@@ -49,6 +51,7 @@ namespace TextRePG.Classes.GameStates
                     break;
 
                 case 3:
+                    StateStack.PopState();
                     StateStack.PushState(State.ID.MainMenu);
                     break;
             }

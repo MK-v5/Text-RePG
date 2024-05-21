@@ -2,6 +2,7 @@
 {
     public static class InputManager
     {
+
         /// <summary>
         /// Receives integer input and returns it.
         /// </summary>
