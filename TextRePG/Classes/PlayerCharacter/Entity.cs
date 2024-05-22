@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using TextRePG.Classes.GameStates;
 using TextRePG.Classes.PlayerCharacter.CharacterClasses;
 using TextRePG.Classes.PlayerCharacter.CharacterRaces;
 
@@ -7,256 +8,85 @@ namespace TextRePG.Classes.PlayerCharacter
     public class Entity
     {
         
-        public enum EnemyType
+        public enum Action
         {
-            Bandit,
-            Demon,
-            Mercenary,
-            PlagueDoctor
+            PushToRace,
+            PushToClass,
+            PopFromRace,
+            PopFromClass,
+            ClearFromRace,
+            ClearFromClass
         }
-
-        public enum EnemyRace
-        {
-            Rat,
-            Monkey,
-            Horse,
-            Snake
-        }
-
-        public enum Race
-        {
-            None,
-            Wolf,
-            Cat,
-            Fox,
-            Dragon
-        }
-
-        public enum Class
-        {
-            None,
-            Knight,
-            Rogue,
-            Mage,
-            Berserker
-        }
-
-        #region protected properties
-
-        //Name
-        protected string characterName;
-
-        //Level and exp.
-        protected int level;
-        protected int experience;
-        protected int maxExperience;
-        protected int damage;
-
-        //Race Attributes.
-        protected int hitPoints;
-        protected int maxHitPoints;
-
-        protected int skillPoints;
-        protected int maxSkillPoints;
-        protected int magicPoints;
-        protected int maxMagicPoints;
-        
-        //Class Attributes.
-        protected int strength;
-        protected int defense;
-        protected int agility;
-
-        //Miscellanious.
-        protected bool isDead;
-        protected bool blocking;
-
-        #endregion end protected properties
-
-        #region public properties
-
-        public string Name
-        {
-            get => characterName; //returns value of characterName.
-            set => characterName = value; //assigns value of characterName (only in child).
-        }
-
-        public int Level 
-        { 
-            get => level;
-            set => level = value; }
-
-        public int HP
-        {
-            get => hitPoints;
-            protected set => hitPoints = value;
-        }
-
-        public int maxHP
-        {
-            get => maxHitPoints;
-            protected set => maxHitPoints = value;
-        }
-
-        public int SP
-        {
-            get => skillPoints;
-            protected set => skillPoints = value;
-        }
-
-        public int maxSP
-        {
-            get => maxSkillPoints; 
-            protected set => maxSkillPoints = value;
-        }
-
-        public int MP
-        {
-            get => magicPoints; 
-            protected set => magicPoints = value;
-        }
-
-        public int maxMP
-        {
-            get => maxMagicPoints; 
-            protected set => maxMagicPoints = value;
-        }
-
-        public int STR
-        {
-            get => strength;
-            protected set => strength = value;
-        }
-
-        public int DEF
-        {
-            get => defense;
-            protected set => defense = value;
-        }
-
-        public int AGI
-        {
-            get => agility; 
-            protected set => agility = value;
-        }
-
-        public int DMG
-        {
-            get => damage;
-            protected set => damage = value;
-        }
-
-        public bool Blocking
-        {
-            get => blocking;
-            protected set => blocking = value;
-        }
-
-        public bool IsAlive() => HP >= 0;
-
-        public bool IsBlocking() => Blocking;
-
-        public Race characterRace;
-
-        public Class characterClass;
-
-        #endregion end public properties
 
         #region Entity Dictionaries
 
-        private readonly Dictionary<Race, Func<Race?>> raceFactories = new();
-        private readonly Dictionary<Class, Func<Class?>> ClassFactories = new();
+        private readonly Dictionary<Character.Race, Func<Character?>> raceFactories = new();
+        private readonly Dictionary<Character.Class, Func<Character?>> ClassFactories = new();
 
         private readonly List<PlayerTypeQueue> ptList = new List<PlayerTypeQueue>();
 
-        public Entity()
-        {
-            characterName = "";
+        private readonly Character.CharacterContext Context;
 
-            characterRace = Race.None;
-            characterClass = Class.None;
+        public readonly Stack<Character?> characterStack = new();
+
+        public Entity(Character.CharacterContext context)
+        {
+            Context = context;
         }
 
         #endregion End Entity Dictionaries
+
+        public void RegisterCharacterRace<Type>(Character.Race race)where Type : Character
+        {
+            raceFactories[race] = () => Activator.CreateInstance(typeof(Type), this, Context)as Type;
+        }
+
+        public void AddToRace(Character.Race race)
+        {
+            ptList.Add(new PlayerTypeQueue(Action.PushToRace, race));
+        }
+
+        public void AddToClass(Character.Class classs)
+        {
+            ptList.Add(new PlayerTypeQueue(Action.PushToClass, classs));
+        }
+
+        public void PopFrom()
+        {
+            ptList.Add(new PlayerTypeQueue(Action.PopFromRace, Character.Race.None));
+        }
 
         #region Entity Struct Logic
 
         private struct PlayerTypeQueue
         {
-            public readonly Race Race;
-            public readonly Class Class;
+            public readonly Action Action;
+            public readonly Character.Race Race;
+            public readonly Character.Class Class;
 
-            public PlayerTypeQueue(Race race, Class classs)
+            public PlayerTypeQueue(Action action, Character.Race race)
             {
+                Action = action;
                 Race = race;
+            }
+
+            public PlayerTypeQueue(Action action, Character.Class classs)
+            {
+                Action = action;
                 Class = classs;
             }
         }
 
         #endregion End Entity Struct Logic
 
-        #region LevelUp Method
-
-        public virtual void LevelUp()
+        private Character? CreateCharacterRace(Character.Race race)
         {
-            level++;
-            experience -= maxExperience;
-            maxExperience += level * 10;
-
-            switch (this)
+            if (raceFactories.TryGetValue(race, out var raceFactory))
             {
-                //increase stats by race
-                case Wolf:
-                    maxHitPoints += 20;
-                    maxSkillPoints += 30;
-                    maxMagicPoints += 25;
-                    break;
-
-                case Cat:
-                    maxHitPoints += 20;
-                    maxSkillPoints += 30;
-                    maxMagicPoints += 25;
-                    break;
-
-                case Fox:
-                    maxHitPoints += 20;
-                    maxSkillPoints += 30;
-                    maxMagicPoints += 25;
-                    break;
-
-                case Dragon:
-                    maxHitPoints += 20;
-                    maxSkillPoints += 30;
-                    maxMagicPoints += 25;
-                    break;
-
-                //increase stats by Class
-                case Knight:
-                    strength += 35;
-                    defense += 15;
-                    agility += 5;
-                    break;
-
-                case Rogue:
-                    strength += 35;
-                    defense += 15;
-                    agility += 5;
-                    break;
-
-                case Mage:
-                    strength += 35;
-                    defense += 15;
-                    agility += 5;
-                    break;
-
-                case Berserker:
-                    strength += 35;
-                    defense += 15;
-                    agility += 5;
-                    break;
+                return raceFactory.Invoke();
             }
+
+            throw new ArgumentException($"Race not Recognised: {race}");
         }
-
-        #endregion end LevelUp Method
-
     }
 }

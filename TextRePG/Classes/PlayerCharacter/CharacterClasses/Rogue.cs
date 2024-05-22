@@ -8,7 +8,7 @@ namespace TextRePG.Classes.PlayerCharacter.CharacterClasses
 {
     public class Rogue : Character
     {
-        public Rogue()
+        public Rogue(Entity EntityStack, CharacterContext context) : base(EntityStack, context)
         {
             characterClass = Class.Rogue;
             strength = 15;

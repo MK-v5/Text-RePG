@@ -107,25 +107,21 @@ namespace TextRePG.Classes.GameStates
             switch (input)
             {
                 case 1:
-                    characterList.Add(new Wolf());
                     StateStack.PopState();
                     StateStack.PushState(State.ID.ClassSelect);
                     break;
 
                 case 2:
-                    characterList.Add(new Cat());
                     StateStack.PopState();
                     StateStack.PushState(State.ID.ClassSelect);
                     break;
 
                 case 3:
-                    characterList.Add(new Fox());
                     StateStack.PopState();
                     StateStack.PushState(State.ID.ClassSelect);
                     break;
 
                 case 4:
-                    characterList.Add(new Dragon());
                     StateStack.PopState();
                     StateStack.PushState(State.ID.ClassSelect);
                     break;
@@ -160,25 +156,21 @@ namespace TextRePG.Classes.GameStates
             switch (input)
             {
                 case 1:
-                    CreateCharacter(new Knight());
                     StateStack.PopState();
                     StateStack.PushState(State.ID.CharacterCreator);
                     break;
 
                 case 2:
-                    CreateCharacter(new Rogue());
                     StateStack.PopState();
                     StateStack.PushState(State.ID.CharacterCreator);
                     break;
 
                 case 3:
-                    CreateCharacter(new Mage());
                     StateStack.PopState();
                     StateStack.PushState(State.ID.CharacterCreator);
                     break;
 
                 case 4:
-                    CreateCharacter(new Berserker());
                     StateStack.PopState();
                     StateStack.PushState(State.ID.CharacterCreator);
                     break;

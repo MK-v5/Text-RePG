@@ -10,7 +10,7 @@ namespace TextRePG.Classes.PlayerClass
 {
     public class Player : Character
     {
-        public Player(Character character)
+        public Player(Character character, Entity EntityStack, CharacterContext context) : base(EntityStack, context)
         {
             Debug.WriteLine($"Hello {character}");
         }

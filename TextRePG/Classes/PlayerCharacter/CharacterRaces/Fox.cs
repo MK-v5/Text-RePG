@@ -8,7 +8,7 @@ namespace TextRePG.Classes.PlayerCharacter.CharacterRaces
 {
     public class Fox : Character
     {
-        public Fox()
+        public Fox(Entity EntityStack, CharacterContext context)
         {
             characterRace = Race.Fox;
             maxHitPoints = 15;

@@ -61,8 +61,6 @@ namespace TextRePG.Classes.GameStates
 
         void CombatChoices(int input)
         {
-            player.characterClass = Entity.Class.Rogue;
-            player.characterRace = Entity.Race.Cat;
 
             switch (input) 
             {

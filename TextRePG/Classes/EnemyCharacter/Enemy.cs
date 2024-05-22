@@ -19,7 +19,7 @@ namespace TextRePG.Classes.EnemyCharacter
 
         private Character? player;
 
-        public Enemy(Character? player)
+        public Enemy(Character? player, Entity EntityStack, CharacterContext context) : base(EntityStack, context)
         {
             this.player = player;
 
