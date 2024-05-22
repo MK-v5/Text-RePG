@@ -33,11 +33,19 @@ namespace TextRePG.Classes.GameStates
 
         #endregion end constructor values
 
-        void CombatLoop()
+        public override void Update()
         {
-            while(player.HP > 0)
+            while (player.HP > 0)
             {
                 Draw();
+            }
+            if(player.HP <= 0)
+            {
+                Lose();
+            }
+            if (enemy.HP <= 0)
+            {
+                Win();
             }
         }
 
@@ -86,18 +94,12 @@ namespace TextRePG.Classes.GameStates
 
         void Lose()
         {
-            if(player.HP <= 0)
-            {
                 Console.WriteLine("You Were Slain.");
-            }
         }
 
         void Win()
         {
-            if(enemy.HP <= 0)
-            {
                 Console.WriteLine("You succesfully defeated the enemy, you get to live for another battle.");
-            }
         }
 
         public override string ToString()
