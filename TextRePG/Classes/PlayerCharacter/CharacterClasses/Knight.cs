@@ -10,6 +10,7 @@ namespace TextRePG.Classes.PlayerCharacter.CharacterClasses
     {
         public Knight()
         {
+            characterClass = Class.Knight;
             strength = 15;
             defense = 30;
             agility = 10;

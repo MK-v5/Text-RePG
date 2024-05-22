@@ -10,6 +10,7 @@ namespace TextRePG.Classes.PlayerCharacter.CharacterClasses
     {
         public Mage()
         {
+            characterClass = Class.Mage;
             strength = 10;
             defense = 10;
             agility = 15;

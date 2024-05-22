@@ -36,6 +36,7 @@ namespace TextRePG.Classes.GameStates
             {
                 case 1:
                     StateStack.PopState();
+                    StateStack.PushState(State.ID.Combat);
                     break;
 
                 case 2:

@@ -10,6 +10,7 @@ namespace TextRePG.Classes.PlayerCharacter.CharacterClasses
     {
         public Rogue()
         {
+            characterClass = Class.Rogue;
             strength = 15;
             defense = 10;
             agility = 40;

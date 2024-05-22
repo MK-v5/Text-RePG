@@ -15,11 +15,15 @@ namespace TextRePG.Lib
             Console.ForegroundColor = ConsoleColor.White;
         }
 
+        /// <summary>
+        /// Draws the options in a state.
+        /// </summary>
+        /// <param name="options">The available options.</param>
         public static void DrawOptions(string[] options)
         {
             for(int i = 0; i < options.Length; i++)
             {
-                Console.WriteLine($"{i + 1}) {options[i]}");
+                Console.WriteLine($"{i + 1}) {options[i]}"); //goes through i to display the options.
             }
         }
     }

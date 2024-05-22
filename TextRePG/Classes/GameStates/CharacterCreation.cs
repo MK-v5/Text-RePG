@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,13 +16,8 @@ namespace TextRePG.Classes.GameStates
 
         public readonly string[] options = { "Create Character", "View Characters", "Main Menu" };
 
-        public readonly string[] raceOptions = { "Wolf", "Cat", "Fox", "Dragon" };
-
-        public readonly string[] classOptions = { "Knight", "Rogue", "Mage", "Berserker" };
-
-
-
-        public CharacterCreation(Stacker stateStack, Context context) : base(stateStack, context)
+        public CharacterCreation(Stacker stateStack, Context context)
+            : base(stateStack, context)
         { characterList = CharacterList; }
 
         public override void Draw()
@@ -41,13 +37,12 @@ namespace TextRePG.Classes.GameStates
             switch (input)
             {
                 case 1:
-                    ChooseRace();
-                    Console.Clear();
+                    StateStack.PopState();
+                    StateStack.PushState(State.ID.RaceSelect);
                     break;
 
                 case 2:
-                    Console.WriteLine("nothing here right now");
-                    Console.ReadKey();
+                    ShowCharacters();
                     break;
 
                 case 3:
@@ -56,102 +51,29 @@ namespace TextRePG.Classes.GameStates
                     break;
             }
         }
-        void ChooseRace()
+
+        void ShowCharacters()
         {
-            GUI.DrawOptions(raceOptions);
-
-            Console.WriteLine("\nPlease choose a race:\n");
-            SelectRace(InputManager.GetIntInput("-> "));
-        }
-
-        void ChooseClass()
-        {
-            GUI.DrawOptions(classOptions);
-
-            Console.WriteLine("\nPlease choose a class:\n");
-            SelectClass(InputManager.GetIntInput("-> "));
-        }
-
-        void SelectRace(int input)
-        {
-            switch (input)
+            if(characterList.Count == 0)
             {
-                case 1:
-                    Console.Clear();
-                    CreateCharacter(new Wolf());
-                    ChooseClass();
-                    break;
-
-                case 2:
-                    Console.Clear();
-                    CreateCharacter(new Cat());
-                    ChooseClass();
-                    break;
-
-                case 3:
-                    Console.Clear();
-                    CreateCharacter(new Fox());
-                    ChooseClass();
-                    break;
-
-                case 4:
-                    Console.Clear();
-                    CreateCharacter(new Dragon());
-                    ChooseClass();
-                    break;
+                Console.WriteLine("No characters to see here");
+            }
+            else
+            {
+                Console.WriteLine(CharacterList);
             }
         }
 
-        void SelectClass(int input)
+        protected Character CreateCharacter(Character playerCharacter)
         {
-            switch (input)
-            {
-                case 1:
-                    Console.Clear();
-                    CreateCharacter(new Knight());
-                    StateStack.PushState(State.ID.MainMenu);
-                    break;
+            Console.Clear();
 
-                case 2:
-                    Console.Clear();
-                    CreateCharacter(new Rogue());
-                    StateStack.PushState(State.ID.MainMenu);
-                    break;
-
-                case 3:
-                    Console.Clear();
-                    CreateCharacter(new Mage());
-                    StateStack.PushState(State.ID.MainMenu);
-                    break;
-
-                case 4:
-                    Console.Clear();
-                    CreateCharacter(new Berserker());
-                    StateStack.PushState(State.ID.MainMenu);
-                    break;
-            }
-        }
-
-        private Character CreateCharacter(Character playerCharacter)
-        {
-
-            string? nameInput;
-
-            do
-            {
-                Console.WriteLine(">>> Character: \n" +
-                                    $"Race: {playerCharacter}");
-
-                Console.WriteLine("Please enter a valid name(2 to 18 characters):");
-                nameInput = Console.ReadLine();
-
-            } while(nameInput?.Length < 2 || nameInput?.Length > 18);
-
-            if (nameInput != null) playerCharacter.Name = nameInput;
+            Console.WriteLine($"Race: {playerCharacter.characterRace}" +
+                            $"\nClass: {playerCharacter.characterClass}");
 
             characterList.Add(playerCharacter);
-
             return playerCharacter;
+            Console.ReadKey();
         }
 
         public override string ToString()
@@ -159,4 +81,116 @@ namespace TextRePG.Classes.GameStates
             return "Character Creator";
         }
     }
+
+    #region Selects
+
+    public class RaceSelect : CharacterCreation
+    {
+
+        public readonly string[] raceOptions = { "Wolf", "Cat", "Fox", "Dragon" };
+
+        public RaceSelect(Stacker stateStack, Context context) 
+        : base (stateStack, context) 
+        { characterList = CharacterList; }
+
+        public override void Draw()
+        {
+            Console.Clear();
+            GUI.DrawOptions(raceOptions);
+
+            Console.WriteLine("\nPlease choose a race:\n");
+            SelectRace(InputManager.GetIntInput("-> "));
+        }
+
+        void SelectRace(int input)
+        {
+            switch (input)
+            {
+                case 1:
+                    characterList.Add(new Wolf());
+                    StateStack.PopState();
+                    StateStack.PushState(State.ID.ClassSelect);
+                    break;
+
+                case 2:
+                    characterList.Add(new Cat());
+                    StateStack.PopState();
+                    StateStack.PushState(State.ID.ClassSelect);
+                    break;
+
+                case 3:
+                    characterList.Add(new Fox());
+                    StateStack.PopState();
+                    StateStack.PushState(State.ID.ClassSelect);
+                    break;
+
+                case 4:
+                    characterList.Add(new Dragon());
+                    StateStack.PopState();
+                    StateStack.PushState(State.ID.ClassSelect);
+                    break;
+            }
+        }
+
+        public override string ToString()
+        {
+            return "Race Select";
+        }
+    }
+
+    public class ClassSelect : CharacterCreation
+    {
+
+        public readonly string[] classOptions = { "Knight", "Rogue", "Mage", "Berserker" };
+
+        public ClassSelect (Stacker stateStack, Context context) : base (stateStack, context)
+        { characterList = CharacterList; }
+
+        public override void Draw()
+        {
+            Console.Clear();
+            GUI.DrawOptions(classOptions);
+
+            Console.WriteLine("\nPlease choose a class:\n");
+            SelectClass(InputManager.GetIntInput("-> "));
+        }
+
+        void SelectClass(int input)
+        {
+            switch (input)
+            {
+                case 1:
+                    CreateCharacter(new Knight());
+                    StateStack.PopState();
+                    StateStack.PushState(State.ID.CharacterCreator);
+                    break;
+
+                case 2:
+                    CreateCharacter(new Rogue());
+                    StateStack.PopState();
+                    StateStack.PushState(State.ID.CharacterCreator);
+                    break;
+
+                case 3:
+                    CreateCharacter(new Mage());
+                    StateStack.PopState();
+                    StateStack.PushState(State.ID.CharacterCreator);
+                    break;
+
+                case 4:
+                    CreateCharacter(new Berserker());
+                    StateStack.PopState();
+                    StateStack.PushState(State.ID.CharacterCreator);
+                    break;
+            }
+        }
+
+        public override string ToString()
+        {
+            return "Class Select";
+        }
+    }
+
+    #endregion end selects
+
 }

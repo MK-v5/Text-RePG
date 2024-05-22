@@ -10,6 +10,7 @@ namespace TextRePG.Classes.PlayerCharacter.CharacterRaces
     {
         public Cat()
         {
+            characterRace = Race.Cat;
             maxHitPoints = 10;
             maxSkillPoints = 30;
             maxMagicPoints = 15;

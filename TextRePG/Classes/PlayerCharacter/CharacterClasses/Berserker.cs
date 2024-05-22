@@ -10,6 +10,7 @@ namespace TextRePG.Classes.PlayerCharacter.CharacterClasses
     {
         public Berserker()
         {
+            characterClass = Class.Berserker;
             strength = 30;
             defense = 15;
             agility = 10;

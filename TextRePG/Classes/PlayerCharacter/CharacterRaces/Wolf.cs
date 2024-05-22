@@ -10,6 +10,7 @@ namespace TextRePG.Classes.PlayerCharacter.CharacterRaces
     {
         public Wolf()
         {
+            characterRace = Race.Wolf;
             maxHitPoints = 40;
             maxSkillPoints = 10;
             maxMagicPoints = 15;

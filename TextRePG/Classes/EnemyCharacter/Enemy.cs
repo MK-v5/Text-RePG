@@ -11,21 +11,6 @@ namespace TextRePG.Classes.EnemyCharacter
 {
     public class Enemy : Character
     {
-        public enum EnemyType
-        {
-            Bandit,
-            Demon,
-            Mercenary,
-            PlagueDoctor
-        }
-
-        public enum EnemyRace
-        {
-            Rat,
-            Monkey,
-            Horse,
-            Snake
-        }
 
         private float statModifier = 0.4f;
 

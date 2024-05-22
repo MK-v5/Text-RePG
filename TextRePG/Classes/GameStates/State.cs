@@ -5,15 +5,9 @@ namespace TextRePG.Classes.GameStates
 {
     public abstract class State
     {
-
-        protected Stack<State> CurrentGameState; //CurrentGameState is current state of the application
-        protected bool EndCombat; //EndCombat checks if combat has ended
-
         protected List<Character> characterList; //List of created characters
-        protected List<Character> deadCharacters; //List of dead characters
 
         private const int list_size = 7;
-
 
         /// <summary>
         /// ID's of the states you want to implement.
@@ -22,6 +16,9 @@ namespace TextRePG.Classes.GameStates
         {
             MainMenu,
             CharacterCreator,
+            ClassSelect,
+            RaceSelect,
+            Combat,
             Game,
             Pause,
             None
@@ -37,19 +34,18 @@ namespace TextRePG.Classes.GameStates
         {
 
             /// <summary>
-            /// Context constructor, Making i include the properties i want to 
+            /// Context constructor, Making sure i include the properties i want to 
             /// have intialized in the arguments.
             /// 
             /// 
             /// </summary>
-            public Context(int health)
+            public Context(List<Character> characters)
             {
-
+                Characters = characters;
             }
 
-            
+            public readonly List<Character> Characters;
 
-            //public readonly int 
         }
 
         protected Stacker StateStack;
@@ -61,12 +57,6 @@ namespace TextRePG.Classes.GameStates
             protected set => characterList = value;
         }
 
-        public List<Character> DeadCharacters
-        {
-            get => deadCharacters;
-            protected set => deadCharacters = value;
-        }
-
         //Initializes a state
         protected State(Stacker stateStack, Context stateContext)
         {
@@ -74,7 +64,6 @@ namespace TextRePG.Classes.GameStates
             StateContext = stateContext;
 
             this.CharacterList = characterList;
-            this.DeadCharacters = deadCharacters;
             this.CharacterList = new List<Character>(list_size); //capping the size of the list
         }
 

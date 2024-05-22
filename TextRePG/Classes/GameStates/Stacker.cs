@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace TextRePG.Classes.GameStates
 {
     /// <summary>
-    /// 
+    /// Stack based manager for handling states.
+    /// used for dynamic systems
     /// </summary>
     public class Stacker
     {
@@ -23,13 +24,12 @@ namespace TextRePG.Classes.GameStates
             public readonly Action Action;
             public readonly State.ID stateId;
 
-            public ChangeQueue(Action rAction, State.ID rSiD)
+            public ChangeQueue(Action action, State.ID iD)
             {
-                Action = rAction;
-                stateId = rSiD;
+                Action = action;
+                stateId = iD;
             }
         }
-
 
         #region Dictionairies
 
@@ -47,6 +47,8 @@ namespace TextRePG.Classes.GameStates
         }
 
         #endregion end Dictionaries
+
+        #region state voids
 
         /// <summary>
         /// Registers a state type with the state stack.
@@ -112,6 +114,8 @@ namespace TextRePG.Classes.GameStates
             queueList.Clear();
         }
 
+        #endregion end state voids
+
         private State? CreateState(State.ID iD)
         {
             if (factories.TryGetValue(iD, out var factory))
@@ -119,7 +123,7 @@ namespace TextRePG.Classes.GameStates
                 return factory.Invoke();
             }
 
-            throw new ArgumentException($"State ID not regocnized: {iD}");
+            throw new ArgumentException($"State ID not recognized: {iD}");
         }
     }
 }

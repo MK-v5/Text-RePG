@@ -6,50 +6,53 @@ namespace TextRePG.Classes.PlayerCharacter
 {
     public class Entity
     {
-        public enum CombatChoices
+        
+        public enum EnemyType
         {
-            None,
-            Attack,
-            Defend,
-            Skill,
+            Bandit,
+            Demon,
+            Mercenary,
+            PlagueDoctor
+        }
+
+        public enum EnemyRace
+        {
+            Rat,
+            Monkey,
+            Horse,
+            Snake
         }
 
         public enum Race
         {
+            None,
             Wolf,
             Cat,
             Fox,
-            Dragon,
-            None
+            Dragon
         }
 
         public enum Class
         {
+            None,
             Knight,
             Rogue,
             Mage,
-            Berserker,
-            None
-        }
-
-        public Entity()
-        {
-            characterName = "";
-
-            characterRace = Race.None;
-            characterClass = Class.None;
+            Berserker
         }
 
         #region protected properties
 
+        //Name
         protected string characterName;
 
+        //Level and exp.
         protected int level;
         protected int experience;
         protected int maxExperience;
         protected int damage;
 
-        //Race Attributes
+        //Race Attributes.
         protected int hitPoints;
         protected int maxHitPoints;
 
@@ -58,13 +61,12 @@ namespace TextRePG.Classes.PlayerCharacter
         protected int magicPoints;
         protected int maxMagicPoints;
         
-        //Class Attributes
+        //Class Attributes.
         protected int strength;
         protected int defense;
         protected int agility;
-        protected bool weild;
 
-        //Miscellanious
+        //Miscellanious.
         protected bool isDead;
         protected bool blocking;
 
@@ -153,15 +155,46 @@ namespace TextRePG.Classes.PlayerCharacter
 
         public bool IsBlocking() => Blocking;
 
-        //public Race characterRace;
-        //public Class characterClass;
-        public CombatChoices combatOptions;
-
         public Race characterRace;
 
         public Class characterClass;
 
         #endregion end public properties
+
+        #region Entity Dictionaries
+
+        private readonly Dictionary<Race, Func<Race?>> raceFactories = new();
+        private readonly Dictionary<Class, Func<Class?>> ClassFactories = new();
+
+        private readonly List<PlayerTypeQueue> ptList = new List<PlayerTypeQueue>();
+
+        public Entity()
+        {
+            characterName = "";
+
+            characterRace = Race.None;
+            characterClass = Class.None;
+        }
+
+        #endregion End Entity Dictionaries
+
+        #region Entity Struct Logic
+
+        private struct PlayerTypeQueue
+        {
+            public readonly Race Race;
+            public readonly Class Class;
+
+            public PlayerTypeQueue(Race race, Class classs)
+            {
+                Race = race;
+                Class = classs;
+            }
+        }
+
+        #endregion End Entity Struct Logic
+
+        #region LevelUp Method
 
         public virtual void LevelUp()
         {
@@ -222,5 +255,8 @@ namespace TextRePG.Classes.PlayerCharacter
                     break;
             }
         }
+
+        #endregion end LevelUp Method
+
     }
 }

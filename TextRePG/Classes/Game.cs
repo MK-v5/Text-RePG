@@ -8,16 +8,10 @@ namespace TextRePG.Classes
 
         private readonly Stacker stacker;
 
-        /*
-        private Stack<State> stateStack; //created stack for the state class
-        private List<Character>? characterList; //create an arrayList for the characters
-        private List<Character>? characterGraveYard; // create a list of deceased characters
-        */
-
         public Game()
         {
 
-            stacker = new Stacker(new State.Context(10));
+            stacker = new Stacker(new State.Context());
             RegisterState();
 
             stacker.PushState(State.ID.MainMenu);
@@ -29,6 +23,9 @@ namespace TextRePG.Classes
         {
             stacker.RegisterState<Menus>(State.ID.MainMenu);
             stacker.RegisterState<CharacterCreation>(State.ID.CharacterCreator);
+            stacker.RegisterState<RaceSelect>(State.ID.RaceSelect);
+            stacker.RegisterState<ClassSelect>(State.ID.ClassSelect);
+            stacker.RegisterState<Combat>(State.ID.Combat);
         }
 
         public void Run()
